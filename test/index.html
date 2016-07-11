@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript" src="bower_components/async/lib/async.js"></script>
+<script type="text/javascript" src="bower_components/schema-inspector/lib/schema-inspector.js"></script>
+<script src="lib/schema-enforcer.js"></script>
+<script>
+        var User = new SchemaEnforcer({
+            type: 'object',
+            properties: {
+                firstname: { type: 'string', rules: ['trim', 'title'] },
+                lastname: { type: 'string', rules: ['trim', 'title'] },
+                jobs: {
+                    type: 'array',
+                    splitWith: ',',
+                    items: { type: 'string', rules: ['trim', 'title'] }
+                },
+                email: { type: 'string', rules: ['trim', 'lower'] }
+            }
+        });
+        var myUser = new User({
+            firstname: 'sterling  ',
+            lastname: '  archer',
+            jobs: ['Special agent, cocaine Dealer'],
+            email: 'NEVER!',
+        })
+</script>
+</html>

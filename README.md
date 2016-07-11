@@ -19,18 +19,10 @@ It's designed to work both client-side and server-side and to be scalable with a
 ## Usage
 
 ```javascript
-var inspector = require('schema-inspector');
+var SchemaEnforcer = require('schema-enforcer');
 
-// Data that we want to sanitize and validate
-var data = {
-	firstname: 'sterling  ',
-	lastname: '  archer',
-	jobs: 'Special agent, cocaine Dealer',
-	email: 'NEVER!',
-};
-
-// Sanitization Schema
-var sanitization = {
+// User Schema
+var schema = {
 	type: 'object',
 	properties: {
 		firstname: { type: 'string', rules: ['trim', 'title'] },
@@ -43,53 +35,60 @@ var sanitization = {
 		email: { type: 'string', rules: ['trim', 'lower'] }
 	}
 };
+
+var User   = new SchemaEnforcer(schema);
+
+// user we want to create 
+var userData = {
+	firstname: 'sterling  ',
+	lastname: '  archer',
+	jobs: 'Special agent, cocaine Dealer',
+	email: 'NEVER!',
+};
+
+// will throw an error as jobs property is expected to be array
+var newUserInstance = new User(userData)
+
+
 // Let's update the data
-inspector.sanitize(sanitization, data);
 /*
-data is now:
+userData = 
 {
 	firstname: 'Sterling',
 	lastname: 'Archer',
 	jobs: ['Special Agent', 'Cocaine Dealer'],
 	email: 'never!'
 }
-*/
-
-// Validation schema
-var validation = {
-	type: 'object',
-	properties: {
-		firstname: { type: 'string', minLength: 1 },
-		lastname: { type: 'string', minLength: 1 },
-		jobs: {
-			type: 'array',
-			items: { type: 'string', minLength: 1 }
-		},
-		email: { type: 'string', pattern: 'email' }
-	}
-};
-var result = inspector.validate(validation, data);
-if (!result.valid)
-	console.log(result.format());
-/*
-	Property @.email: must match [email], but is equal to "never!"
-*/
+// will return and instance of user
+var newUserInstance = new User(userData)
 ```
-
-**Tips:** it's recommended to use one schema for the sanitzation and another for the validation,
 
 ## In the browser
 
 ```html
 <script type="text/javascript" src="async.js"></script>
 <script type="text/javascript" src="schema-inspetor.js"></script>
+<script type="text/javascript" src="schema-enforcer.js"></script>
 <script type="text/javascript">
-	var schema = { /* ... */ };
-	var candidate = { /* ... */ };
-	SchemaInspector.validate(schema, candidate, function (err, result) {
-		if (!result.valid)
-			return alert(result.format());
-	});
+	 var User = new SchemaEnforcer({
+                type: 'object',
+                properties: {
+                    firstname: { type: 'string', rules: ['trim', 'title'] },
+                    lastname: { type: 'string', rules: ['trim', 'title'] },
+                    jobs: {
+                        type: 'array',
+                        splitWith: ',',
+                        items: { type: 'string', rules: ['trim', 'title'] }
+                    },
+                    email: { type: 'string', rules: ['trim', 'lower'] }
+                }
+            });
+            var myUser = new User({
+                firstname: 'sterling  ',
+                lastname: '  archer',
+                jobs: ['Special agent, cocaine Dealer'],
+                email: 'NEVER!',
+            })
 </script>
 ```
 
