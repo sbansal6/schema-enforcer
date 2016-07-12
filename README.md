@@ -21,46 +21,40 @@ It's designed to work both client-side and server-side and to be scalable with a
 ```javascript
 var SchemaEnforcer = require('schema-enforcer');
 
-// User Schema
-var schema = {
-	type: 'object',
-	properties: {
-		firstname: { type: 'string', rules: ['trim', 'title'] },
-		lastname: { type: 'string', rules: ['trim', 'title'] },
-		jobs: {
-			type: 'array',
-			splitWith: ',',
-			items: { type: 'string', rules: ['trim', 'title'] }
-		},
-		email: { type: 'string', rules: ['trim', 'lower'] }
-	}
-};
+// Define User Schema
+var User   = new SchemaEnforcer({
+                                	type: 'object',
+                                	properties: {
+                                		firstname: { type: 'string', rules: ['trim', 'title'] },
+                                		lastname: { type: 'string', rules: ['trim', 'title'] },
+                                		jobs: {
+                                			type: 'array',
+                                			splitWith: ',',
+                                			items: { type: 'string', rules: ['trim', 'title'] }
+                                		},
+                                		email: { type: 'string', rules: ['trim', 'lower'] }
+                                	}
+                                });
 
-var User   = new SchemaEnforcer(schema);
-
-// user we want to create 
-var userData = {
-	firstname: 'sterling  ',
-	lastname: '  archer',
-	jobs: 'Special agent, cocaine Dealer',
-	email: 'NEVER!',
-};
-
+// create new user rob
 // will throw an error as jobs property is expected to be array
-var newUserInstance = new User(userData)
+var Rob = new User({
+                   	firstname: 'rob',
+                   	lastname: 'archer',
+                   	jobs: 'Special agent, cocaine Dealer',
+                   	email: 'NEVER!',
+                   })
 
 
-// Let's update the data
-/*
-userData = 
-{
-	firstname: 'Sterling',
-	lastname: 'Archer',
-	jobs: ['Special Agent', 'Cocaine Dealer'],
-	email: 'never!'
-}
+
+// create new user alex
 // will return and instance of user
-var newUserInstance = new User(userData)
+var alex = new User({
+                                       	firstname: 'alex',
+                                       	lastname: 'knight',
+                                       	jobs: ['Special agent, cocaine Dealer'],
+                                       	email: 'NEVER!',
+                                       })
 ```
 
 ## In the browser
@@ -70,25 +64,39 @@ var newUserInstance = new User(userData)
 <script type="text/javascript" src="schema-inspetor.js"></script>
 <script type="text/javascript" src="schema-enforcer.js"></script>
 <script type="text/javascript">
-	 var User = new SchemaEnforcer({
-                type: 'object',
-                properties: {
-                    firstname: { type: 'string', rules: ['trim', 'title'] },
-                    lastname: { type: 'string', rules: ['trim', 'title'] },
-                    jobs: {
-                        type: 'array',
-                        splitWith: ',',
-                        items: { type: 'string', rules: ['trim', 'title'] }
-                    },
-                    email: { type: 'string', rules: ['trim', 'lower'] }
-                }
-            });
-            var myUser = new User({
-                firstname: 'sterling  ',
-                lastname: '  archer',
-                jobs: ['Special agent, cocaine Dealer'],
-                email: 'NEVER!',
-            })
+	 // Define User Schema
+     var User   = new SchemaEnforcer({
+                                     	type: 'object',
+                                     	properties: {
+                                     		firstname: { type: 'string', rules: ['trim', 'title'] },
+                                     		lastname: { type: 'string', rules: ['trim', 'title'] },
+                                     		jobs: {
+                                     			type: 'array',
+                                     			splitWith: ',',
+                                     			items: { type: 'string', rules: ['trim', 'title'] }
+                                     		},
+                                     		email: { type: 'string', rules: ['trim', 'lower'] }
+                                     	}
+                                     });
+     
+     // create new user rob
+     // will throw an error as jobs property is expected to be array
+     var Rob = new User({
+                        	firstname: 'rob',
+                        	lastname: '  archer',
+                        	jobs: 'Special agent, cocaine Dealer',
+                        	email: 'NEVER!',
+                        })
+     
+     
+     // create new user alex
+     // will return and instance of user
+     var alex = new User({
+                                            	firstname: 'alex',
+                                            	lastname: 'knight',
+                                            	jobs: ['Special agent, cocaine Dealer'],
+                                            	email: 'NEVER!',
+                                            })
 </script>
 ```
 

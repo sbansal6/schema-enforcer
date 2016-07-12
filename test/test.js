@@ -20,8 +20,8 @@ describe('schema-enforcer',function(){
         // jobs is an string but array expected as per schema
         var createUser = function () {
             new User({
-                firstname: 'sterling  ',
-                lastname: '  archer',
+                firstname: 'rob',
+                lastname: 'archer',
                 jobs: 'Special agent, cocaine Dealer',
                 email: 'NEVER!',
             })
@@ -33,8 +33,8 @@ describe('schema-enforcer',function(){
         // jobs is an array as expected in schema
         var createUser = function () {
             new User({
-                firstname: 'sterling  ',
-                lastname: '  archer',
+                firstname: 'alex',
+                lastname: '  knight',
                 jobs: ['Special agent, cocaine Dealer'],
                 email: 'NEVER!',
             })
