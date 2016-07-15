@@ -1,6 +1,6 @@
 {
   "name": "schema-enforcer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "https://github.com/sbansal6/schema-enforcer",
   "authors": [
     {
@@ -12,14 +12,17 @@
   "description": "Schema-Enforcer is a powerful tool to enforce schema on JS objects.",
   "main": "index.js",
   "keywords": [
-    "schema-enforcer",
-    "schema-inspector",
+    "schema enforcer",
+    "json schema enforcer",
+    "javascript schema enforcer",
+    "enforcer",
+    "schema",
     "validation",
-    "sanitization",
     "inspector",
-    "node-inspector",
+    "validator",
     "json",
-    "validator"
+    "validate",
+    "sanitize"
   ],
   "license": "MIT",
   "ignore": [

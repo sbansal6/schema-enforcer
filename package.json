@@ -1,7 +1,7 @@
 {
   "name": "schema-enforcer",
   "description": "Schema-Enforcer is a powerful tool to enforce schema on JS objects.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "index.js",
   "author": {
     "name": "Saurabh Bansal",
@@ -12,10 +12,11 @@
   ],
   "keywords": [
     "schema enforcer",
+    "json schema enforcer",
+    "javascript schema enforcer",
     "enforcer",
     "schema",
     "validation",
-    "sanitization",
     "inspector",
     "validator",
     "json",
