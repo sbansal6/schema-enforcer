@@ -38,13 +38,13 @@
   },
   "homepage": "https://github.com/sbansal6/schema-enforcer",
   "dependencies": {
-    "async": "^1.5.2",
-    "schema-inspector": "^1.6.4"
+    "async": "1.5.2",
+    "schema-inspector": "1.6.8"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^2.3.3",
-    "should": "^7.1.1"
+    "chai": "3.5.0",
+    "mocha": "2.3.3",
+    "should": "7.1.1"
   },
   "scripts": {
     "test": "make test"
